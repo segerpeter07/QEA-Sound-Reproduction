@@ -58,40 +58,111 @@ if __name__ == "__main__":
 
         os.chdir(name + '/')
 
+        # Hello
         print('Say: HELLO')
-        file1 = name + "1.wav"
+        file1 = "hello_1.wav"
+        record_sound(file1)
+        print('Say: HELLO')
+        file1 = "hello_2.wav"
+        record_sound(file1)
+        print('Say: HELLO')
+        file1 = "hello_3.wav"
         record_sound(file1)
 
+
+        # Bug
         print('Say: BUG')
-        file2 = name + "2.wav"
+        file2 = "bug_1.wav"
+        record_sound(file2)
+        print('Say: BUG')
+        file2 = "bug_2.wav"
+        record_sound(file2)
+        print('Say: BUG')
+        file2 = "bug_3.wav"
         record_sound(file2)
 
+
+        # Cow
         print('Say: COW')
-        file3 = name + "3.wav"
+        file3 = "cow_1.wav"
+        record_sound(file3)
+        print('Say: COW')
+        file3 = "cow_2.wav"
+        record_sound(file3)
+        print('Say: COW')
+        file3 = "cow_3.wav"
         record_sound(file3)
 
+
+        # Home
         print('Say: HOME')
-        file4 = name + "4.wav"
+        file4 = "home_1.wav"
+        record_sound(file4)
+        print('Say: HOME')
+        file4 = "home_1.wav"
+        record_sound(file4)
+        print('Say: HOME')
+        file4 = "home_1.wav"
         record_sound(file4)
 
+
+        # Sure
         print('Say: SURE')
-        file5 = name + "5.wav"
+        file5 = "sure_1.wav"
+        record_sound(file5)
+        print('Say: SURE')
+        file5 = "sure_2.wav"
+        record_sound(file5)
+        print('Say: SURE')
+        file5 = "sure_3.wav"
         record_sound(file5)
 
+
+        # Sun
         print('Say: SUN')
-        file6 = name + "6.wav"
+        file6 = "sun_1.wav"
+        record_sound(file6)
+        print('Say: SUN')
+        file6 = "sun_2.wav"
+        record_sound(file6)
+        print('Say: SUN')
+        file6 = "sun_3.wav"
         record_sound(file6)
 
+
+        # Turkey
         print('Say: Turkey')
-        file7 = name + "7.wav"
+        file7 = "tukey_1.wav"
+        record_sound(file7)
+        print('Say: Turkey')
+        file7 = "tukey_2.wav"
+        record_sound(file7)
+        print('Say: Turkey')
+        file7 = "tukey_3.wav"
         record_sound(file7)
 
+
+        # Pumpkin
         print('Say: PUMPKIN')
-        file8 = name + "8.wav"
+        file8 = "pumpkin_1.wav"
+        record_sound(file8)
+        print('Say: PUMPKIN')
+        file8 = "pumpkin_2.wav"
+        record_sound(file8)
+        print('Say: PUMPKIN')
+        file8 = "pumpkin_3.wav"
         record_sound(file8)
 
+
+        # Maple
         print('Say: MAPLE')
-        file9 = name + "9.wav"
+        file9 = "maple_1.wav"
+        record_sound(file9)
+        print('Say: MAPLE')
+        file9 = "maple_2.wav"
+        record_sound(file9)
+        print('Say: MAPLE')
+        file9 = "maple_3.wav"
         record_sound(file9)
 
         os.chdir(head)
