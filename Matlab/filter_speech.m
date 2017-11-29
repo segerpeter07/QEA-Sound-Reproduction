@@ -2,7 +2,7 @@ function filtered = filter_speech(y, fs)
     %   Takes audio data in time domain and applies band pass filter
 
     %   Average audio channels
-    y = mean(y')';
+%    y = mean(y')';
     
     %   Transfer data to frequency domain
     freq = (fft(y));
