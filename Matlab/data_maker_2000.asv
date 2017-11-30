@@ -1,0 +1,7 @@
+load('dataset_1.mat');
+filtered = [];
+for i = 1:size(trial_1,2)
+    filtered = [filtered filter_speech(trial_
+end
+filtered = filter_speech(trial_1, Fs);
+equalized = equalize_length(filtered, Fs);
