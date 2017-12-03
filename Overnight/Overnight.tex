@@ -117,7 +117,7 @@ The correlation matrix is:
 \]
 \begin{marginfigure}
     \centering
-    \includegraphics[width = 4cm, height = 4cm]{correlation.jpg}
+    \includegraphics[width = 6cm, height = 5cm]{correlation.jpg}
     \label{fig:corr}
 \caption{Example of Correlation Matrix Plot}
 (\href{https://www.quora.com/Whats-the-best-way-to-visualize-correlations-between-six-value-vectors}{Referenced})
@@ -143,7 +143,7 @@ A covariance matrix is a matrix built of covariance coefficients, which are the 
 
 \begin{marginfigure}
     \centering
-    \includegraphics[width = 5cm, height = 4cm]{cov.png}
+    \includegraphics[width = 6cm, height = 5cm]{cov.png}
     \label{fig:cov}
 \caption{Example of Covariance Matrix Plot}
 (\href{https://www.mathworks.com/matlabcentral/answers/196574-factor-analysis-a-covariance-matrix-is-not-positive-definite}{Referenced})
@@ -158,7 +158,7 @@ Load sample data in MATLAB by typing \textit{load hospital}. Then, with \textit{
 
 \begin{marginfigure}
     \centering
-    \includegraphics[width = 5cm, height = 4cm]{PCA.png}
+    \includegraphics[width = 6cm, height = 5cm]{PCA.png}
     \label{fig:PCA}
 \caption{Example of PCA}
 (\href{https://people.duke.edu/~ccc14/sta-663/PCASolutions.html}{Referenced})
@@ -186,11 +186,6 @@ Load sample data in MATLAB by typing \textit{load hald}. Conduct SVD on one of f
 
 \section{Frequency Analysis and Filtering (3 hours)}
 
-\begin{marginfigure}
-Insert margin figures here
-\caption{caption here}
-\end{marginfigure}
-
 \subsection{Discrete Fourier Transform (DFT)}
 *This section reviews and builds off section of the overnight from Module 2 Night 3.
 
@@ -208,7 +203,7 @@ Recall that when a computer (or any digital device) samples an audio source, it 
 	\includegraphics[width=0.7\textwidth]{discrete_time.png}
 	\caption{\smaller{A continuous signal (in grey) being sampled at a specified sample rate (red arrows).}}
 	\label{fig:discrete_time}
-\end{figure}
+ \end{figure}
 
 As in figure \ref{fig:discrete_time}, a continuous sound signal can be broken up, or sampled, at different points. As you can imagine, if you don't sample at a high enough frequency, you will lose valuable information about your continuous signal. This is called aliasing. As you also might remember, as per the \textit{Nyquist Sampling Theorem}, you only have to sample at twice the frequency of the highest frequency present in your continuous signal to be able to fully reconstruct your continuous signal. 
 
@@ -263,23 +258,47 @@ To covert the signal back to time domain, you can use a similar matrix and the w
 \subsection{Spectral Subtraction}
 
 
-% ----- Spectral Subtraction -----
+% ----- Audio Preprocessing -----
 
 \section{Audio Preprocessing (2 hours)}
 
+Now that we've learned how to build two different types of filters, we're going to learn how to apply them to audio clips. As we get into that, however, we will rapidly realize the length of the word matters greatly. Since each person recording their clip didn't say their word at exactly the same time, we are going to need to correct this by trimming the clips to all start at exactly the same time and last for the same duration as can be see in figure \ref{fig:time_graphs}.
 \begin{marginfigure}
-Insert margin figures here
-\caption{caption here}
+	\includegraphics[width = 6cm, height = 5cm]{time_1.png}
+	\includegraphics[width = 6cm, height = 5cm]{time_2.png}
+	\caption{Two raw audio clips before processing}
+	\label{fig:time_graphs}
 \end{marginfigure}
 
-%Length Matching
+\subsection{Algorithm Creation}
+To start trimming these clips to length, we should start by observing them. Obviously the levels of the word are significantly higher than other times during the clip. However, some clips have more fluctuation in their levels surrounding the words, so we'll need to apply our filtering.
 
-% Applying Filters
 
-\subsection{Apply Eigen and Frequency analysis to audio}
+\begin{marginfigure}
+	\includegraphics[width = 6cm, height = 5cm]{cleaned_time_2.png}
+	\caption{Two raw audio clips before processing}
+	\label{fig:cleaned_time_graphs}
+\end{marginfigure}
+After filtering is done (as can be seen in figure \ref{fig:cleaned_time_graphs}), after applying the band pass filter, our data is significantly cleaner and devoid of noise. This helps our 'word part' stand out much more.
+
+To isolate the word consistently, we shall define a threshold and gather a section of the clip surrounding the point where this threshold is triggered. In essence, we will look through all the sample points of the signal and when the level goes above 0.1, we shall take out a sub clip of 0.5s surrounding that point. 
+
+
+\textit{Exerise 1}
+
+Build an algorithm to trim all the sound clips to be the same length and contain the word part. Work on this for an hour, and if you do not come up with something, feel free to use the sample script found \href{#}{here}. We don't want you to struggle on a relatively simple algorithm, but feel it would help familiarize you with the format of the data sets. 
+
+\subsection{Finding Average Voice & Going Further}
 % Finding Average Face
+\textit{Exercise 2}
 
+Just as you did in the \textit{Eigen Analysis Revisited} section, find the average voice of the data set. (Hint: Start by putting all the sound clips in the frequency domain. Remember to use your cleaned data set that you just made!)
+
+\\
 % Go further
+\textit{Exercise 3 *Optional}
+
+Now that you have found the average voice, feel free to try the eigen analysis section using the sound data sets and the average voice you just found. 
 
 \end{document}
 
