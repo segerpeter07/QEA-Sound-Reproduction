@@ -1,0 +1,14 @@
+a = data(:, 1);
+sound(a, Fs);
+
+m = abs(a);
+t = atan(imag(a)./real(a));
+size(t)
+size(m)
+q = m.*exp(j*t);
+new = ifft(q);
+
+plot(a(1:200));
+hold on;
+new = abs(new);
+plot(new(1:200));
