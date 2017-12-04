@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{exercise}
 \usepackage{enumerate}
+\usepackage{mathtools}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{enumitem}
 %\usepackage{subcaption}
@@ -254,12 +255,12 @@ To covert the signal back to time domain, you can use a similar matrix and the w
 \end{equation}
 
 \subsection{Noise Removal}
-One of the more useful operations in audio processing is the filtering of unwanted noise from an audio sample. In the context of voice recognition, this means removing all extraneous sounds – background noise, microphone hiss, recording artifacts – other than the actual voice that we are trying to isolate. This is particularly relevant to the problem of voice recognition, since we want our program to only match based on the qualities of individual voices, not the conditions of their recordings.
+One of the more useful operations in audio processing is the filtering of unwanted noise from an audio sample. In the context of voice recognition, this means removing all extraneous sounds - background noise, microphone hiss, recording artifacts - other than the actual voice that we are trying to isolate. This is particularly relevant to the problem of voice recognition, since we want our program to only match based on the qualities of individual voices, not the conditions of their recordings.
 
-In this section, we will be exploring a few methods of removing unwanted noise using the frequency domain. Using audioread in MATLAB, load the sound sample NASA_80Hz_2900Hz. This is a recording of a NASA transmission, but it has been corrupted with two sinewave tones that are playing over the original sample.
+In this section, we will be exploring a few methods of removing unwanted noise using the frequency domain. Using $audioread$ in MATLAB, load the sound sample CHANGE FILE NAME. This is a recording of a NASA transmission, but it has been corrupted with two sine wave tones that are playing over the original sample.
 
 \begin{enumerate}
-	\item Plot the DFT of the corrupted audio file, and compare it to the clean, original recording (NASA.wav). What is different?
+	\item Plot the DFT of the corrupted audio file, and compare it to the clean, original recording (CHANGE FILE NAME). What is different?
 	\item How do the frequencies represented in the original audio sample compare to the frequencies added as noise?
 \end{enumerate}
 
@@ -267,7 +268,7 @@ One of the simplest filtering techniques is the ideal high-pass and ideal low-pa
 
 \begin{enumerate}
 	\setcounter{enumi}{3}
-	\item Implement an ideal band-pass filter and apply it to the corrupted NASA transmission. Keep in mind that you don’t want to remove the voice from the recording, so you may want to look up what the typical frequency range of a human voice is when determining your threshold frequencies.
+	\item Implement an ideal band-pass filter and apply it to the corrupted NASA transmission. Keep in mind that you don't want to remove the voice from the recording, so you may want to look up what the typical frequency range of a human voice is when determining your threshold frequencies.
 	\item Compare the processed recording to the corrupted recording and to the original, uncorrupted recording. What is different? Does your new sample sound different than the clean sample?
 	\item What are the limitations of this method of noise filtering?
 \end{enumerate}
@@ -275,7 +276,7 @@ One of the simplest filtering techniques is the ideal high-pass and ideal low-pa
 \subsection{Spectral Subtraction Overview}
 As you probably discovered, ideal band-pass filters are very effective at removing background noise from an audio file \textit{provided that it is outside the frequency range of the sounds you want to preserve}. If the noise had been in the frequency range of human speech, it would not have been possible to filter out this way without damaging the original signal.
 
-Spectral subtraction, a different technique which is actually used commonly in audio processing, doesn’t have this limitation. It relies on the following assumption:
+Spectral subtraction, a different technique which is actually used commonly in audio processing, doesn't have this limitation. It relies on the following assumption:
 \begin{equation}
 	T[n] = V[n] + N[n]
 \end{equation}
@@ -288,7 +289,7 @@ In other words, to get the voice information on its own, you just need to subtra
 There are several useful resources online for spectral subtraction, but \href{http://practicalcryptography.com/miscellaneous/machine-learning/tutorial-spectral-subraction/}{here} is one that I found particularly useful.
 
 \subsection{Spectral Subtraction Implementation}
-For this part of the assignment, you will be using spectral subtraction to remove the excess noise from this audio file: NASA_noisy.wav. Unlike the previous corrupted recording, this sample has some added radio static that spans the entire frequency domain – including the frequencies represented in the voice itself.
+For this part of the assignment, you will be using spectral subtraction to remove the excess noise from this audio file: CHANGE FILE NAME. Unlike the previous corrupted recording, this sample has some added radio static that spans the entire frequency domain - including the frequencies represented in the voice itself.
 
 An important step to implementing spectral subtraction is slicing the original sample into several smaller chunks. This helps you better identify and define your noise profile and allows you to operate on samples of arbitrary length.
 
@@ -352,13 +353,23 @@ Where $n$ is the number of slices in your sample of background noise. We can the
 Where $h$ is a semi-arbitrary ``noise-to-sound ratio`` The higher this value, the more noise you remove, and the more you damage the original signal. I used a value of 0.7, but it is worth experimenting with this to see how it affects your results.
 
 You also want to make sure that your filtered matrix is always at least zero, because it is the magnitude of your complex DFT values (and a negative magnitude doesn't make sense in this context). You can treat it like a piece wise function:
+\begin{figure}
+	\centering 
+	\includegraphics[width=0.7\textwidth]{piecewise.png}
+	\label{fig:piecewise}
+ \end{figure}
+This gives us the magnitudes of the slice DFTs for a filtered recording. We can use these magnitudes, and the phases we recorded earlier, to obtain the complex values of the DFT:
 \begin{equation}
-	T_{M_{clean}} = 
-	\begin{cases}
-                                   T_{M_{clean}} & \text{for T_{M_{clean}}\greq 0} \\
-                                   0 & \text{for T_{M_{clean}} < 0} \\
-  \end{cases}
+	T_{clean} = T_{M_{clean}}e^{jT_\theta}
 \end{equation}
+From there, you just need to compute the inverse DFT of each sample and combine the time-domain samples in a useful way.
+\begin{enumerate}
+	\setcounter{enumi}{6}
+	\item Plot the filtered and unfiltered sound in time and frequency domain. How did the spectral subtraction affect the signal?
+	\item Listen to your filtered sound and to CHANGE FILE NAME How are they different? Try adjusting your parameter for slice length and see how that affects this difference.
+	\item Apply this technique to CHANGE FILE NAME. How does it compare to the ideal band-pass filter for filtering out the two sinewaves?
+	\item Try one of the modifications to spectral subtraction described in the ``Modifications`` section of the \href{http://practicalcryptography.com/miscellaneous/machine-learning/tutorial-spectral-subraction/}{linked page}. How does this effect the quality of noise removal?
+\end{enumerate}
 
 % ----- Audio Preprocessing -----
 
@@ -378,7 +389,7 @@ To start trimming these clips to length, we should start by observing them. Obvi
 
 \begin{marginfigure}
 	\includegraphics[width = 6cm, height = 5cm]{cleaned_time_2.png}
-	\caption{Two raw audio clips before processing}
+	\caption{Audio clip after being filtered with a band-pass filter}
 	\label{fig:cleaned_time_graphs}
 \end{marginfigure}
 After filtering is done (as can be seen in figure \ref{fig:cleaned_time_graphs}), after applying the band pass filter, our data is significantly cleaner and devoid of noise. This helps our 'word part' stand out much more.
