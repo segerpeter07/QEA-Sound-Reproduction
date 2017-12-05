@@ -21,12 +21,11 @@ voice_num = randi(size(fft_equalized,2), 1);
 % returns index of the identified voice file
 [index] = calculate_difference(Reduced_Train, Reduced_Test);
 
-voice_num = 1;
 
 % plots!
 subplot(2,2,1); 
 plot(equalized(:,voice_num));
-title('Recognized Voice(FFT)');
+title(strcat('Recognized person is... ', Names(voice_num)));
 sound(equalized(:,voice_num), Fs)
 
 subplot(2,2,2);
