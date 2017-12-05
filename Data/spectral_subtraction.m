@@ -105,6 +105,6 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
     %subplot(2, 2, 4);
     %plot(fftshift(abs(fft(processed))));
     sound(unprocessed/max(unprocessed), Fs);
-    pause(4)
+    pause(length(unprocessed)/Fs)
     sound(processed/max(processed), Fs);
 end
