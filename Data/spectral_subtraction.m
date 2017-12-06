@@ -11,6 +11,16 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
     ups = size(unprocessed);
     ras = size(room_audio);
     min_length = min(ups(1), ras(1));
+    
+    %   Adds zeros to the end of the shorter vector
+    length_diff = max(ups(1), ras(1)) - min_length;
+    correction_mat = zeros(length_diff, 1);
+    if ups(1) < ras(1)
+        unprocessed = [unprocessed; correction_mat];
+    else
+        room_audio = [room_audio; correction_mat];
+    end
+    
     a = unprocessed;
     equalized = [a(1:min_length), room_audio(1:min_length)];
 
