@@ -34,9 +34,13 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">Audio Processing</h1>
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<div style="text-align:center;">
+								<span class="image"><img src="images/time_2.png" alt="" /></span>
+								<br>
+							</div>
+							<p>To build a large enough database of words to accurately train and test our algorithm, we build a data collection and processing system. Using a class of 30 students, we had each student say 8 words 3 times. This resulted in 24 three second clips of audio from each person. This gave us a total database of 720 clips of audio. </p>
+							<p>Since the audio clips were recorded in a pretty noisy space using just a standard microphone built into a laptop, there was significant filtering that needed to be done. Some of the data was tested using a standard band pass filter that used frequencies identified as present in the noise to remove some of it. This worked pretty well, but a better filter was developed using a spectral subtraction algorithm discussed <a href="spectralsubtraction.html" target="_blank">here</a>.</p>
+							<p>Even further, each clip had people saying the word at slightly different times which would alter the fourier transform by introducing a phase offset. To combat this, each clip was trimmed to the same length with the component containing the word centered. This not only limited the amount of ambient noise in the sample, but helped prevent the introduction of a phase offset in the frequency response. This algorithm however, worked by checking for audio signals above a certain threshold which worked for most clips, but broke on clips that contained sudden spikes of loud noise such as a door closing or clapping.</P>
 						</div>
 					</section>
 
