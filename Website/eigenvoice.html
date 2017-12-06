@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Eigenvoices - A QEA Final Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Intro</a></li>
+							<li><a href="#one">What it is</a></li>
+							<li><a href="#two">How it works</a></li>
+							<li><a href="#three">Do it yourself</a></li>
+							<li><a href="http://meet.olin.edu/olin-isms/quantitative-engineering-analysis-qea" target="_blank">Learn More about QEA</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Eigenvoice</h1>
+							<p>A voice identification system that uses eigen-based linear algebra and voice synthesis system using a Hidden Markov Model (HMM) and Mel Log Spectrum Approximation Filtering.</p>
+							<p>Final project for Quantitative Engineering Analysis (QEA) at <a href="http://www.olin.edu/" target="_blank">Olin College</a>. Fall 2017.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- What it is -->
+					<section id="one" class="wrapper style3">
+						<div class="inner">
+							<h1>What it is</h1>
+							<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+							<ul class="actions">
+								<li><a href="#two" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="two" class="wrapper style2 spotlights">
+						<section>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Spectral Subtraction Filtering</h2>
+									<p>Using samples of only background noise along with the whole signal, the frequencies with prevelent noise were modulated to reduce the noise with very accurate results.</p>
+									<ul class="actions">
+										<li><a href="spectralsubtraction.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Audio Processing</h2>
+									<p>After collecting a dataset of words, each clip was projected into the frequency domain using a discrete fourier transform before being filtered and trimmed to length.</p>
+									<ul class="actions">
+										<li><a href="audioprocessing.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Principal Component Analysis</h2>
+									<p>Each word dataset contained three sub-datasets that were used to calculate the covariance matrix. Then the eigenvectors were calculated and the principal components used to identify voices.</p>
+									<ul class="actions">
+										<li><a href="pca.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="three" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Do it yourself</h2>
+							<p>As part of this final project, we created a problem set to help teach the information to other students. This 8 hour problem set covers a review of core linear algebra concepts including:</p>
+							<ul>
+								<li>Principal Component Analysis (PCA)</li>
+								<li>Covariance and Correlatio Matrices</li>
+								<li>Single Value Decomposition (SVD)</li>
+							</ul>
+							We also combine these linear algebra concepts with frequency analysis concepts including:
+							<ul>
+								<li>Sampling Rates</li>
+								<li>Discrete Fourier Transforms</li>
+								<li>Spectral Subtraction filtering in frequency domain</li>
+							</ul>
+							<ul class="actions">
+								<li><a href="https://github.com/segerpeter07/QEA-Sound-Reproduction/blob/master/Overnight/on2.pdf" target="_blank" class="button">Check it out</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>Made with &hearts; at Olin College in Needham, MA. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li><a href="#" class="fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
