@@ -33,10 +33,38 @@
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
+
 							<h1 class="major">Spectral Subtraction Filtering</h1>
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+
+							<p>For something as delicate as a voice recognition algorithm, you want the input data to be as clean and consistent as possible. In other words, the optimal piece of software would be able to recognize a given voice regardless of whether it was recorded in a noisy hallway or an empty room.</p>
+
+							<p> Spectral subtraction is a method to remove such background noise without damaging useful data from the speech itself. Its basic principle can be derived from its name: it involves generating a frequency spectrum from a sample of background noise – “spectral” – then subtracts this frequency profile from the sample as a whole – “subtraction.” Under the assumption that the original recording was some combination of clean voice data and a noisy environment, you are able to replicate a clean recording by subtracting out the extraneous noise in this way. </p>
+
+							<div class="box alt">
+								<div class="row uniform">
+									<div class="4u"><span class="image fit"><img src="images/CleanSample2.png" alt="" /></span></div>
+									<div class="4u"><span class="image fit"><img src="images/NoisySample2.png" alt="" /></span></div>
+									<div class="4u$"><span class="image fit"><img src="images/CleanedSample2.png" alt="" /></span></div>
+								</div>
+							</div>
+							<p> Above, you can see our spectral subtraction filter removing excess noise from a voice recording.</p>
+								<div class="row">
+									<div class="6u 12u$(medium)">
+										<h3>Our Code</h3>
+										<p>Our MATLAB program for spectral subtraction, as well as the rest of the code for our voice recognition software, can be found on GitHub:</p>
+										<ul class="actions fit">
+											<li><a href="#" class="button">View our code</a></li>
+										</ul>
+									</div>
+									<div class="6u$ 12u$(medium)">
+										<h3>Other Resources</h3>
+										<p>A helpful walkthrough and explanation of spectral subtraction, along with sample MATLAB code snippets, can be found here: </p>
+										<ul class="actions fit">
+											<li><a href="#" class="button">Spectral Subtraction Tutorial</a></li>
+										</ul>
+									</div>
+								</div>
+							<h3>
 						</div>
 					</section>
 
