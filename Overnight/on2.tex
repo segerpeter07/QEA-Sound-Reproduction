@@ -72,11 +72,15 @@
 
 \begin{description}[font=$\bullet$\scshape\bfseries]
 
+\item[]Review the concept about Principal Component Analysis
+
 \item[]Understand the difference between correlation and covariance matrix and how they are applied in different situations. 
 
 \item[]Understand what Singular Value Decomposition(SVD) yields and learn how to implement it in MATLAB.
 
-\item[]Be able to construct a spectrum subtraction filter and process audio clips.
+\item[]Review DFT and explore its possible applications such as noise removal and spectral subtraction filtering.
+
+\item[]Review basic signal processing concepts such as Nyquist Theorem.
 
 \item[]Apply the knowledge from facial recognition and implement for voice classification via MATLAB.
 
@@ -88,33 +92,77 @@
 \section{Eigen Analysis Revisited (3 hours)}
 
 \subsection{What did we learn?}
-During QEA I Module II, we learned how to recognize faces by conducting Principal Component Analysis, also known as Eigenfaces method. Basic idea for voice recognition works in similar fashion: a voice can be classified based on its variation from the entire mean of the voice data. Since \textbf{variance} can be also interpreted as the distance, or difference from the mean of the data, we can apply the same math from Module II for recognizing voices, such as Singular Vector Decomposition. Since it has been to long from middle of the first semester, we will review mathematical concept. 
+During QEA I Module II, we learned how to recognize faces by conducting Principal Component Analysis, also known as Eigenfaces method. Basic idea for voice recognition works in similar fashion: a voice can be classified based on its variation from the mean of the voice data. Since \textbf{variance} can be also interpreted as the distance, or difference from the mean of the data, we can apply the same math from Module II for recognizing voices, such as Singular Value Decomposition (SVD). Since it's been a while, we will review basic mathematical concept from QEA I Module II. 
 
 \subsection{Principal Component Analysis - Correlation and Covariance}
-Principal Component Analysis (PCA) uses an orthogonal transformation to convert a data set to a set of values of linearly uncorrelated variables called principal components.The number of distinct principal components is equal to the smaller of the number of original variables or the number of observations minus one (N-1). The transformation is defined that the first principal component has the largest possible variance, second principal component has the second largest possible variance and so on. Since the components are orthogonal to the preceding components, the resulting vectors are an uncorrelated orthogonal basis set. PCA is sensitive to the relative scaling of the original variables. Conducting PCA can be done by eigenvalue decomposition of a data covariance or correlation matrix or singular value decomposition of a data matrix, usually after mean centering (and normalizing) the data matrix for each elements. (\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{Referenced})
+Principal Component Analysis (PCA) uses an orthogonal transformation to convert a data set to a set of values of linearly uncorrelated variables called principal components. The number of distinct principal components is equal to the smaller of the number of original variables or the number of observations minus one ($N-1$). The transformation is defined that the first principal component has the most information, second principal component has the second most information and so on. Then, reconstructed data with selected principal components (extracted feature) would 'summarize' the data. Since the components are orthogonal to the preceding components, the resulting vectors are an uncorrelated orthogonal basis set, which means vectors are linearly independent to each others. This means, any data can be reconstructed with set of principal components in the form of linear combination. In voice recognition, we can find a piece of voice data that is most linearly related to the test data. This means a data that has the least difference or highest correlation / covariance is our answer to the test. 
 
-A correlation matrix is a matrix showing correlation coefficients between sets of variables. Higher correlation coefficients mean two different data tips are more related to each other. Therefore, if a data matrix is defined as following:
+Conducting PCA can be done by eigenvalue decomposition of a data covariance or correlation matrix or SVD of a data matrix, usually after mean centering (and normalizing) the data matrix for each elements. (\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{Referenced})
+Let's assume a data matrix is defined as following:
 
 \[
-\textbf{Data} = 
+\textbf{X} = 
 \begin{bmatrix}
-    x_{1} & y_{1}  \\
-    x_{2} & y_{2}  \\
-    \vdots & \vdots \\
-    x_{n} & y_{n} 
+    x_{1}   \\
+    x_{2}   \\
+    \vdots \\
+    x_{n} 
 \end{bmatrix}
 \]
+
+A covariance matrix is a matrix built of covariances, which are the measures of how changes in one variable are associated with changes in a second variable. Essentially, covariances indicate the degrees of linear association between two variables. The covariance matrix can be defined as
+
+\[
+\textbf{Covariance Matrix(B)}= 
+\frac{1}{N-1}
+\begin{bmatrix}
+    (x_{1}-\mu_{1})(x_{1}-\mu_{1})  & (x_{1}-\mu_{1})(x_{2}-\mu_{2}) & \dots & (x_{1}-\mu_{1})(x_{n}-\mu_{n}) \\
+    
+    (x_{2}-\mu_{2})(x_{1}-\mu_{1}) & (x_{2}-\mu_{2})(x_{2}-\mu_{2}) & \dots &  (x_{2}-\mu_{2})(x_{n}-\mu_{n})\\
+    
+    \vdots  & \vdots & \ddots & \vdots \\
+    
+    (x_{n}-\mu_{n})(x_{1}-\mu{1}) & (x_{n}-\mu_{n})(x_{2}-\mu_{2}) & \dots & (x_{n}-\mu_{n})(x_{n}-\mu_{n}) 
+
+\end{bmatrix}
+\]
+
+If the data set is not a vector (n by m) matrix, each element for the covariance matrix can be described as:
+
+\[ \bar{\Sigma} = \frac{1}{N}\sum_{i=1}^{N}(x_{i}-\bar{\mu})(x_{i}-\bar{\mu})^{\textbf{T}} \]
+
+where \[ \bar{\mu} = \frac{1}{N}\sum_{i=1}^{N}x_{i} \]
+
+\begin{marginfigure}
+    \centering
+    \includegraphics[width = 4cm, height = 3cm]{cov.png}
+    \label{fig:cov}
+\caption{Example of Covariance Matrix Plot}
+(\href{https://www.mathworks.com/matlabcentral/answers/196574-factor-analysis-a-covariance-matrix-is-not-positive-definite}{Referenced})
+
+\end{marginfigure}
+
+
+A correlation matrix is a matrix showing correlation coefficients between sets of variables. Higher magnitude OF correlation coefficients mean that two different data tips are more linearly related to each other. Still, data tips can be strongly related with smaller magnitude correlation coefficients, just not linearly. 
+
 The correlation matrix is:
 \[
 \textbf{Correlation Matrix(A)}= 
 \frac{1}{\sqrt{N}}
 \begin{bmatrix}
-    \frac{x_{1}-\mu_{x}}{\sigma_{x}}  & \frac{y_{1}-\mu_{y}}{\sigma_{y}} \\
-    \frac{x_{2}-\mu_{x}}{\sigma_{x}} & \frac{y{2}-\mu_{y}}{\sigma_{y}} \\
-    \frac{x_{3}-\mu_{x}}{\sigma_{x}} & \frac{y_{3}-\mu_{y}}{\sigma_{y}} \\
-    \dots  & \dots
+    \frac{(x_{1}-\mu_{1})(x_{1}-\mu_{1})}{\sigma_{x_1}\sigma_{x_1}}  & \frac{(x_{1}-\mu_{1})(x_{2}-\mu_{2})}{\sigma_{x_1}\sigma_{x_2}} & \dots & \frac{(x_{1}-\mu_{1})(x_{n}-\mu_{n})}{\sigma_{x_1}\sigma_{x_n}} \\
+    \frac{(x_{2}-\mu_{1})(x_{1}-\mu_{1})}{\sigma_{x_2}\sigma_{x_1}}  & \frac{(x_{2}-\mu_{2})(x_{2}-\mu_{2})}{\sigma_{x_2}\sigma_{x_2}} & \dots & \vdots \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \frac{(x_{n}-\mu_{n})(x_{1}-\mu_{1})}{\sigma_{x_n}\sigma_{x_1}}  & \frac{(x_{n}-\mu_{n})(x_{2}-\mu_{2})}{\sigma_{x_n}\sigma_{x_2}} & \dots & \frac{(x_{n}-\mu_{n})(x_{n}-\mu_{n})}{\sigma_{x_n}\sigma_{x_n}} 
 \end{bmatrix}
 \]
+
+
+Where $\sigma_{x_n}$ is the standard deviation.
+
+
+Then, how should we choose what matrix to use for Principal Component Analysis? Covariance matrix is commonly used when variables are on the same scale. If the variables are on different scale, correlation matrix is used. For example, if the variables have different units of measure, such as pounds and inches. Since you cannot compare pounds and inches directly, you should use correlation matrix. If you want to conduct PCA on the temperature data for different cities, since the units of measure are the same (Either Fahrenheit or Celsius), covariance matrix should be used. In cases where scales are different, covariance matrix can also adjust the scales of the variables. For example, if you want to conduct PCA on population for different states, using covariance matrix would account for the size of each states.
+
 \begin{marginfigure}
     \centering
     \includegraphics[width = 6cm, height = 5cm]{correlation.jpg}
@@ -125,36 +173,9 @@ The correlation matrix is:
 
 \end{marginfigure}
 
-Where N is the number of rows in the matrix, $\mu_{x}, \mu_{y}$ are the mean of the data set, and $\sigma_{x}, \sigma_{y}$ are the standard deviation of the each column. 
-
-A covariance matrix is a matrix built of covariance coefficients, which are the measures of how changes in one variable are associated with changes in a second variable. Essentially, covariance coefficient indicates the degree of linear association between two variables. Therefore, covariance matrix can be defined as
-
-\[
-\textbf{Covariance Matrix(B)}= 
-\frac{1}{N-1}
-\begin{bmatrix}
-    (x_{1}-\mu_{1})(x_{1}-\mu{1})  & (y_{1}-\mu_{1})(y_{1}-\mu{1}) \\
-    (x_{2}-\mu_{2})(x_{1}-\mu{1}) & (y_{2}-\mu_{2})(x_{2}-\mu{2}) \\
-        \dots  & \dots \\
-    (x_{n}-\mu_{n})(x_{1}-\mu{1}) & (y_{n}-\mu_{n})(y_{1}-\mu{2}) 
-
-\end{bmatrix}
-\]
-
-\begin{marginfigure}
-    \centering
-    \includegraphics[width = 6cm, height = 5cm]{cov.png}
-    \label{fig:cov}
-\caption{Example of Covariance Matrix Plot}
-(\href{https://www.mathworks.com/matlabcentral/answers/196574-factor-analysis-a-covariance-matrix-is-not-positive-definite}{Referenced})
-
-\end{marginfigure}
-
-Then, how should we choose what matrix to use for Principal Component Analysis? Covariance matrix is commonly used when variables are on the same scale. If the variables are on different scale, correlation matrix is used. For example, if the variables have different units of measure, such as pounds and inches. Since you cannot compare pounds and inches directly, you should use correlation matrix. If you want to conduct PCA on the temperature data for different cities, since the units of measure are the same (Either Fahrenheit or Celsius), covariance matrix should be used. In cases where scales are different, covariance matrix can also adjust the scales of the variables. For example, if you want to conduct PCA on population for different states, using covariance matrix would account for the size of each states.
-
-\textit{Exercise 1}
-
-Load sample data in MATLAB by typing \textit{load hospital}. Then, with \textit{[X = hospital.Weight, hospital.BloodPressure]}, plot the correlation and covariance matrix of the data and find how weight and blood pressure are related. Also, state how correlation and covariance matrix are different.
+\begin{enumerate}
+	\item Load sample data in MATLAB by typing \verb|load hospital|. Then, with \verb|[X = hospital.Weight, hospital.BloodPressure]|, plot the correlation and covariance matrix of the data and find how weight and blood pressure are related. Also, state how correlation and covariance matrix are different.
+\end{enumerate}
 
 \begin{marginfigure}
     \centering
@@ -176,10 +197,11 @@ The diagonal entries ${\sigma_{i}}$ of $\mathbf{\Sigma}$ are known as the singul
 
 
 
-\textit{Exerise 2}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Load sample data in MATLAB by typing \verb|load hald|. Conduct SVD on one of four variables and plot the resultant data. Then, conduct SVD without using SVD command and plot the resultant data. Compare two plots to see if they match. These resources might be helpful: \href{https://www.mathworks.com/help/matlab/ref/svd.html}{SVD MATLAB documentation} and \href{http://www.matrixlab-examples.com/singular-value-decomposition.html}{SVD MATLAB tutorial}
 
-Load sample data in MATLAB by typing \textit{load hald}. Conduct SVD on one of four variables and plot the resultant data. These resources might be helpful: \href{https://www.mathworks.com/help/matlab/ref/svd.html}{SVD MATLAB documentation} and \href{http://www.matrixlab-examples.com/singular-value-decomposition.html}{SVD MATLAB tutorial}
-
+\end{enumerate}
 
 
 % ----- Audio Preprocessing -----
@@ -259,6 +281,7 @@ One of the more useful operations in audio processing is the filtering of unwant
 In this section, we will be exploring a few methods of removing unwanted noise using the frequency domain. Using $audioread$ in MATLAB, load the sound sample \verb|NASA_80Hz_2900Hz|. This is a recording of a NASA transmission, but it has been corrupted with two sine wave tones that are playing over the original sample.
 
 \begin{enumerate}
+	\setcounter{enumi}{2}
 	\item Plot the DFT of the corrupted audio file, and compare it to the clean, original recording (\verb|NASA.wav|). What is different?
 	\item How do the frequencies represented in the original audio sample compare to the frequencies added as noise?
 \end{enumerate}
@@ -266,7 +289,7 @@ In this section, we will be exploring a few methods of removing unwanted noise u
 One of the simplest filtering techniques is the ideal high-pass and ideal low-pass filters. For an ideal high-pass filter, all frequencies below a certain threshold are completely eliminated from the signal, while frequencies above that threshold are preserved; the opposite is true for an ideal low-pass filter. These can be accomplished either by applying a convolution or by editing the values of the DFT in MATLAB.
 
 \begin{enumerate}
-	\setcounter{enumi}{2}
+	\setcounter{enumi}{4}
 	\item Implement an ideal band-pass filter and apply it to the corrupted NASA transmission. Keep in mind that you don't want to remove the voice from the recording, so you may want to look up what the typical frequency range of a human voice is when determining your threshold frequencies.
 	\item Compare the processed recording to the corrupted recording and to the original, uncorrupted recording. What is different? Does your new sample sound different than the clean sample?
 	\item What are the limitations of this method of noise filtering?
@@ -357,7 +380,7 @@ This gives us the magnitudes of the slice DFTs for a filtered recording. We can 
 \end{equation}
 From there, you just need to compute the inverse DFT of each sample and combine the time-domain samples in a useful way.
 \begin{enumerate}
-	\setcounter{enumi}{5}
+	\setcounter{enumi}{7}
 	\item Plot the filtered and unfiltered sound in time and frequency domain. How did the spectral subtraction affect the signal?
 	\item Listen to your filtered sound and to \verb|NASA.wav| How are they different? Try adjusting your parameter for slice length and see how that affects this difference.
 	\item Apply this technique to \verb|NASA_80Hz_2900Hz|. How does it compare to the ideal band-pass filter for filtering out the two sinewaves?
@@ -397,7 +420,7 @@ After filtering is done (as can be seen in figure \ref{fig:cleaned_time_graphs})
 To isolate the word consistently, we shall define a threshold and gather a section of the clip surrounding the point where this threshold is triggered. In essence, we will look through all the sample points of the signal and when the level goes above 0.1, we shall take out a sub clip of 0.5s surrounding that point. 
 
 \begin{enumerate}
-	\setcounter{enumi}{9}
+	\setcounter{enumi}{11}
 	\item Build an algorithm to trim all the sound clips to be the same length and contain the word part. Work on this for an hour, and if you do not come up with something, feel free to use the sample script found \href{#}{here}. We don't want you to struggle on a relatively simple algorithm, but feel it would help familiarize you with the format of the data sets. 
 \end{enumerate}
 
@@ -405,7 +428,7 @@ To isolate the word consistently, we shall define a threshold and gather a secti
 \subsection{Finding Average Voice \& Going Further}
 % Finding Average Face
 \begin{enumerate}
-	\setcounter{enumi}{10}
+	\setcounter{enumi}{12}
 	\item Just as you did in the \textit{Eigen Analysis Revisited} section, we're going to find the average voice of the data set. Here's an overview of what we'd like you to do: \\ 
 	\begin{itemize}
 		\item Filter the audio and trim it to length
@@ -417,7 +440,7 @@ To isolate the word consistently, we shall define a threshold and gather a secti
 
 % Go further
 \begin{enumerate}
-	\setcounter{enumi}{11}
+	\setcounter{enumi}{13}
 	\item \textit{Optional:} Now that you have found the average voice, feel free to try the eigen analysis section using the sound data sets and the average voice you just found. 
 \end{enumerate}
 
