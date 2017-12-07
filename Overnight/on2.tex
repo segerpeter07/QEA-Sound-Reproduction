@@ -74,13 +74,12 @@
 
 \item[]Understand the difference between correlation and covariance matrix and how they are applied in different situations. 
 
-\item[]Understand what singular vector decomposition yields and learn how to implement SVD in MATLAB.
+\item[]Understand what Singular Value Decomposition(SVD) yields and learn how to implement it in MATLAB.
+
+\item[]Be able to construct a spectrum subtraction filter and process audio clips.
 
 \item[]Apply the knowledge from facial recognition and implement for voice classification via MATLAB.
 
-\item[]Be able to conduct processing audio data in MATLAB.
-
-\item[]Understand the complex math concept from external sources, such as academic paper.
 \end{description}
 
 
@@ -198,13 +197,13 @@ Key ideas reviewed:
 \end{itemize}
 
 Recall that when a computer (or any digital device) samples an audio source, it samples it at a set frequency, or sampling rate. Basically a computer has a special type of clock in it that allows it to perform sampling operations only a certain number of times during a period of time. 
-
-\begin{figure}
-	\centering 
-	\includegraphics[width=0.7\textwidth]{discrete_time.png}
-	\caption{\smaller{A continuous signal (in grey) being sampled at a specified sample rate (red arrows).}}
-	\label{fig:discrete_time}
- \end{figure}
+ 
+ \begin{marginfigure}
+    \centering
+    \includegraphics[width = 6cm, height = 4cm]{discrete_time.png}
+    \label{fig:discrete_time}
+\caption{A continuous signal (in grey) being sampled at a specified sample rate (red arrows).}
+\end{marginfigure}
 
 As in figure \ref{fig:discrete_time}, a continuous sound signal can be broken up, or sampled, at different points. As you can imagine, if you don't sample at a high enough frequency, you will lose valuable information about your continuous signal. This is called aliasing. As you also might remember, as per the \textit{Nyquist Sampling Theorem}, you only have to sample at twice the frequency of the highest frequency present in your continuous signal to be able to fully reconstruct your continuous signal. 
 
@@ -230,10 +229,10 @@ Now we need to generate a matrix of the sinusoidal basis functions which are all
     W=\dfrac{1}{\sqrt{N}}
 \begin{bmatrix}
     1 & 1 & 1 & \dots  & 1 \\
-    1 & \exp(-\frac{2 \pi j}{N})2 & \exp(-\frac{2 \pi j}{N})3 & \dots  & \exp(-\frac{2 \pi j}{N})(N-1) \\
-    1 & \exp(-\frac{3 \pi j}{N})2 & \exp(-\frac{2 \pi j}{N})3 & \dots  & \exp(-\frac{2 \pi j}{N}) (N-1) \\
+    1 & e^{-\frac{2 \pi j}{N}} & e^{-\frac{2 \pi j}{N}2} & \dots  & e^{-\frac{2 \pi j}{N}(N-1)} \\
+    1 & e^{-\frac{3 \pi j}{N}} & e^{-\frac{2 \pi j}{N}2} & \dots  & e^{-\frac{2 \pi j}{N}(N-1)} \\
     \vdots & \vdots & \vdots & \ddots & \vdots \\
-    1 & \exp(-\frac{(N-1) \pi j}{N})2 & \exp(-\frac{(N-1) \pi j}{N})3 & \dots  & \exp(-\frac{(N-1) \pi j}{N}) (N-1)
+    1 & e^{-\frac{(N-1) \pi j}{N}} & e^{-\frac{(N-1) \pi j}{N}2} & \dots  & e^{-\frac{(N-1) \pi j}{N}(N-1)}
 \end{bmatrix}
 \end{equation}
 This vector can then be used to calculate the weights of $W$ on $x$ as
@@ -247,27 +246,27 @@ To covert the signal back to time domain, you can use a similar matrix and the w
     W^{-1}=\dfrac{1}{\sqrt{N}}
 \begin{bmatrix}
     1 & 1 & 1 & \dots  & 1 \\
-    1 & \exp(\frac{2 \pi j}{N})2 & \exp(\frac{2 \pi j}{N})3 & \dots  & \exp(\frac{2 \pi j}{N})(N-1) \\
-    1 & \exp(\frac{3 \pi j}{N})2 & \exp(\frac{2 \pi j}{N})3 & \dots  & \exp(\frac{2 \pi j}{N}) (N-1) \\
+    1 & e^{\frac{2 \pi j}{N}} & e^{\frac{2 \pi j}{N}2} & \dots  & e^{\frac{2 \pi j}{N}(N-1)} \\
+    1 & e^{\frac{3 \pi j}{N}} & e^{\frac{2 \pi j}{N}2} & \dots  & e^{\frac{2 \pi j}{N}(N-1)} \\
     \vdots & \vdots & \vdots & \ddots & \vdots \\
-    1 & \exp(\frac{(N-1) \pi j}{N})2 & \exp(\frac{(N-1) \pi j}{N})3 & \dots  & \exp(\frac{(N-1) \pi j}{N}) (N-1)
+    1 & e^{\frac{(N-1) \pi j}{N}} & e^{\frac{(N-1) \pi j}{N}2} & \dots  & e^{\frac{(N-1) \pi j}{N}(N-1)}
 \end{bmatrix}
 \end{equation}
 
 \subsection{Noise Removal}
 One of the more useful operations in audio processing is the filtering of unwanted noise from an audio sample. In the context of voice recognition, this means removing all extraneous sounds - background noise, microphone hiss, recording artifacts - other than the actual voice that we are trying to isolate. This is particularly relevant to the problem of voice recognition, since we want our program to only match based on the qualities of individual voices, not the conditions of their recordings.
 
-In this section, we will be exploring a few methods of removing unwanted noise using the frequency domain. Using $audioread$ in MATLAB, load the sound sample CHANGE FILE NAME. This is a recording of a NASA transmission, but it has been corrupted with two sine wave tones that are playing over the original sample.
+In this section, we will be exploring a few methods of removing unwanted noise using the frequency domain. Using $audioread$ in MATLAB, load the sound sample \verb|NASA_80Hz_2900Hz|. This is a recording of a NASA transmission, but it has been corrupted with two sine wave tones that are playing over the original sample.
 
 \begin{enumerate}
-	\item Plot the DFT of the corrupted audio file, and compare it to the clean, original recording (CHANGE FILE NAME). What is different?
+	\item Plot the DFT of the corrupted audio file, and compare it to the clean, original recording (\verb|NASA.wav|). What is different?
 	\item How do the frequencies represented in the original audio sample compare to the frequencies added as noise?
 \end{enumerate}
 
 One of the simplest filtering techniques is the ideal high-pass and ideal low-pass filters. For an ideal high-pass filter, all frequencies below a certain threshold are completely eliminated from the signal, while frequencies above that threshold are preserved; the opposite is true for an ideal low-pass filter. These can be accomplished either by applying a convolution or by editing the values of the DFT in MATLAB.
 
 \begin{enumerate}
-	\setcounter{enumi}{3}
+	\setcounter{enumi}{2}
 	\item Implement an ideal band-pass filter and apply it to the corrupted NASA transmission. Keep in mind that you don't want to remove the voice from the recording, so you may want to look up what the typical frequency range of a human voice is when determining your threshold frequencies.
 	\item Compare the processed recording to the corrupted recording and to the original, uncorrupted recording. What is different? Does your new sample sound different than the clean sample?
 	\item What are the limitations of this method of noise filtering?
@@ -289,7 +288,7 @@ In other words, to get the voice information on its own, you just need to subtra
 There are several useful resources online for spectral subtraction, but \href{http://practicalcryptography.com/miscellaneous/machine-learning/tutorial-spectral-subraction/}{here} is one that I found particularly useful.
 
 \subsection{Spectral Subtraction Implementation}
-For this part of the assignment, you will be using spectral subtraction to remove the excess noise from this audio file: CHANGE FILE NAME. Unlike the previous corrupted recording, this sample has some added radio static that spans the entire frequency domain - including the frequencies represented in the voice itself.
+For this part of the assignment, you will be using spectral subtraction to remove the excess noise from this audio file: \verb|NASA_noisy.wav|. Unlike the previous corrupted recording, this sample has some added radio static that spans the entire frequency domain - including the frequencies represented in the voice itself.
 
 An important step to implementing spectral subtraction is slicing the original sample into several smaller chunks. This helps you better identify and define your noise profile and allows you to operate on samples of arbitrary length.
 
@@ -304,7 +303,7 @@ Additionally, these samples should not be taken exactly end-to-end, but rather o
 \caption{An example of how you might sample your data.}
 \end{marginfigure}
 
-After you slice your sample, you want to find the magnitude and phase of the DFT for the sample, as well as for a section of the sample that contains only noise (in the case of the noisy NASA transmission, the first approximately 4.5 seconds are noise, while the last 4.5 seconds are speech). You ultimately want to end up with the following four matrices:
+After you slice your sample, you want to find the magnitude and phase of the DFT for the sample, as well as for a section of the sample that contains only noise (in the case of the noisy NASA transmission, the first approximately 4.5 seconds are noise, while the last 4.5 seconds are speech). You ultimately want to end up with the following three matrices:
 
 \begin{equation}\label{eq:sampled_audio}
     T_M=
@@ -325,22 +324,16 @@ After you slice your sample, you want to find the magnitude and phase of the DFT
     N_{MS2}       \\
     \vdots \\
 \end{bmatrix}
-	N_\theta=
-\begin{bmatrix}
-    N_{\theta S1}       \\
-    N_{\theta S2}       \\
-    \vdots \\
-\end{bmatrix}
 \end{equation}
 
-Where $T_M$ is a matrix of all the magnitudes of the DFTs of each slice in your sample, $T_\theta$ is a matrix of all the phase information of the DFTs of each slice in your sample, and $N_M$ and $N_\theta$ are similar matrices but sampled from parts of the recording that contain only noise. The MATLAB functions abs and angle will be useful for determining magnitude and phase, respectively, of a matrix of complex numbers.
+Where $T_M$ is a matrix of all the magnitudes of the DFTs of each slice in your sample, $T_\theta$ is a matrix of all the phase information of the DFTs of each slice in your sample, and and $N_M$ is a magnitude matrix similar to $T_M$ but sampled from a part of the recording that contains only noise. The MATLAB functions abs and angle will be useful for determining magnitude and phase, respectively, of a matrix of complex numbers.
 
 Next, we want to determine the average frequency profile of the background noise in our audio file. This will functionally act as the N[n] term that you saw in the first equation, and we will later subtract it from our other data matrix. In this case, we can just find an average:
 \begin{equation}
-	N_{MA} = \frac{1}{n}\sum_{}^{} N_M
+	N_{MA} = \frac{1}{n}\sum_{}^{} N_{MR}
 \end{equation}
 
-Where $n$ is the number of slices in your sample of background noise. We can then subtract this ``average noise`` from each sample of our full sample magnitude matrix, with a weight:
+Where $n$ is the number of slices in your sample of background noise and $N_{MR}$ is the element of $N_M$ in row R. We can then subtract this ``average noise`` from each sample of our full sample magnitude matrix, with a weight:
 \begin{equation}
 	T_{M_{clean}} = (1-h)T_M - h*N_{MA} = 
 	\begin{bmatrix}
@@ -352,7 +345,7 @@ Where $n$ is the number of slices in your sample of background noise. We can the
 
 Where $h$ is a semi-arbitrary ``noise-to-sound ratio`` The higher this value, the more noise you remove, and the more you damage the original signal. I used a value of 0.7, but it is worth experimenting with this to see how it affects your results.
 
-You also want to make sure that your filtered matrix is always at least zero, because it is the magnitude of your complex DFT values (and a negative magnitude doesn't make sense in this context). You can treat it like a piece wise function:
+You also want to make sure that your filtered matrix is always at least zero, because it is the magnitude of your complex DFT values (and a negative magnitude doesn't make sense in this context). You can treat it like a piece wise function: \\
 \begin{figure}
 	\centering 
 	\includegraphics[width=0.7\textwidth]{piecewise.png}
@@ -364,10 +357,10 @@ This gives us the magnitudes of the slice DFTs for a filtered recording. We can 
 \end{equation}
 From there, you just need to compute the inverse DFT of each sample and combine the time-domain samples in a useful way.
 \begin{enumerate}
-	\setcounter{enumi}{6}
+	\setcounter{enumi}{5}
 	\item Plot the filtered and unfiltered sound in time and frequency domain. How did the spectral subtraction affect the signal?
-	\item Listen to your filtered sound and to CHANGE FILE NAME How are they different? Try adjusting your parameter for slice length and see how that affects this difference.
-	\item Apply this technique to CHANGE FILE NAME. How does it compare to the ideal band-pass filter for filtering out the two sinewaves?
+	\item Listen to your filtered sound and to \verb|NASA.wav| How are they different? Try adjusting your parameter for slice length and see how that affects this difference.
+	\item Apply this technique to \verb|NASA_80Hz_2900Hz|. How does it compare to the ideal band-pass filter for filtering out the two sinewaves?
 	\item Try one of the modifications to spectral subtraction described in the ``Modifications`` section of the \href{http://practicalcryptography.com/miscellaneous/machine-learning/tutorial-spectral-subraction/}{linked page}. How does this effect the quality of noise removal?
 \end{enumerate}
 
@@ -375,7 +368,14 @@ From there, you just need to compute the inverse DFT of each sample and combine 
 
 \section{Audio Preprocessing (2 hours)}
 
-Now that we've learned how to build two different types of filters, we're going to learn how to apply them to audio clips. As we get into that, however, we will rapidly realize the length of the word matters greatly. Since each person recording their clip didn't say their word at exactly the same time, we are going to need to correct this by trimming the clips to all start at exactly the same time and last for the same duration as can be see in figure \ref{fig:time_graphs}.
+As you learned in the previous section, audio clips can be quite unclean when they are recorded. Let's say, for example, that we want to build a database of short clips of people saying a single word. This database might be used to train and test an algorithm such as the one we developed before. In our case, here's what we have:
+\begin{itemize}
+	\item 30 People
+	\item 8 words
+	\item Each word repeated 3 times
+	\item Each clip lasts 3 seconds
+\end{itemize}
+This gives us quite a nice set of data, but it's very messy. The provided audio samples were recorded in a pretty loud hallway where people can be heard talking, doors closing, and people walking. In addition, you might notice that each person doesn't say their word at exactly the same time as everyone else. As you can see in figure \ref{fig:time_graphs}, the part of the clip where the person speaks (as characterized by the jump in levels) starts at slightly different times.
 \begin{marginfigure}
 	\includegraphics[width = 6cm, height = 5cm]{time_1.png}
 	\includegraphics[width = 6cm, height = 5cm]{time_2.png}
@@ -396,22 +396,30 @@ After filtering is done (as can be seen in figure \ref{fig:cleaned_time_graphs})
 
 To isolate the word consistently, we shall define a threshold and gather a section of the clip surrounding the point where this threshold is triggered. In essence, we will look through all the sample points of the signal and when the level goes above 0.1, we shall take out a sub clip of 0.5s surrounding that point. 
 
+\begin{enumerate}
+	\setcounter{enumi}{9}
+	\item Build an algorithm to trim all the sound clips to be the same length and contain the word part. Work on this for an hour, and if you do not come up with something, feel free to use the sample script found \href{#}{here}. We don't want you to struggle on a relatively simple algorithm, but feel it would help familiarize you with the format of the data sets. 
+\end{enumerate}
 
-\textit{Exerise 1}
 
-Build an algorithm to trim all the sound clips to be the same length and contain the word part. Work on this for an hour, and if you do not come up with something, feel free to use the sample script found \href{#}{here}. We don't want you to struggle on a relatively simple algorithm, but feel it would help familiarize you with the format of the data sets. 
-
-\subsection{Finding Average Voice & Going Further}
+\subsection{Finding Average Voice \& Going Further}
 % Finding Average Face
-\textit{Exercise 2}
+\begin{enumerate}
+	\setcounter{enumi}{10}
+	\item Just as you did in the \textit{Eigen Analysis Revisited} section, we're going to find the average voice of the data set. Here's an overview of what we'd like you to do: \\ 
+	\begin{itemize}
+		\item Filter the audio and trim it to length
+		\item Add all clips together (in the frequency domain, of course!) and divide by the number of clips. 
+		\item Take an inverse fourier transform of this new clip and listen to it.
+		\item Describe what you hear and think about why it sounds the way it does.
+	\end{itemize}
+\end{enumerate}
 
-Just as you did in the \textit{Eigen Analysis Revisited} section, find the average voice of the data set. (Hint: Start by putting all the sound clips in the frequency domain. Remember to use your cleaned data set that you just made!)
-
-\\
 % Go further
-\textit{Exercise 3 *Optional}
-
-Now that you have found the average voice, feel free to try the eigen analysis section using the sound data sets and the average voice you just found. 
+\begin{enumerate}
+	\setcounter{enumi}{11}
+	\item \textit{Optional:} Now that you have found the average voice, feel free to try the eigen analysis section using the sound data sets and the average voice you just found. 
+\end{enumerate}
 
 \end{document}
 
