@@ -81,7 +81,7 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
 
     %   Prepare to transfer back into time domain
     cleaned_freq = M_clean.*exp(1j*T);
-    cleaned_time = zeros(sample_length*Fs, num_samples);
+    cleaned_time = zeros(round(sample_length*Fs), num_samples);
 
     for s = 1:num_samples
         %   Cycle through samples
