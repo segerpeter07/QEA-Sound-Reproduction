@@ -72,17 +72,17 @@
 
 \begin{description}[font=$\bullet$\scshape\bfseries]
 
-\item[]Review the concept about Principal Component Analysis
+\item[]Review Principal Component Analysis
 
-\item[]Understand the difference between correlation and covariance matrix and how they are applied in different situations. 
+\item[]Understand the difference between correlation and covariance matrices and how they are applied in different situations. 
 
 \item[]Understand what Singular Value Decomposition(SVD) yields and learn how to implement it in MATLAB.
 
 \item[]Review DFT and explore its possible applications such as noise removal and spectral subtraction filtering.
 
-\item[]Review basic signal processing concepts such as Nyquist Theorem.
+\item[]Review basic signal processing concepts such as the Nyquist Theorem.
 
-\item[]Apply the knowledge from facial recognition and implement for voice classification via MATLAB.
+\item[]Apply the knowledge from facial recognition and implement for voice classification using MATLAB.
 
 \end{description}
 
@@ -161,7 +161,7 @@ The correlation matrix is:
 Where $\sigma_{x_n}$ is the standard deviation.
 
 
-Then, how should we choose what matrix to use for Principal Component Analysis? Covariance matrix is commonly used when variables are on the same scale. If the variables are on different scale, correlation matrix is used. For example, if the variables have different units of measure, such as pounds and inches. Since you cannot compare pounds and inches directly, you should use correlation matrix. If you want to conduct PCA on the temperature data for different cities, since the units of measure are the same (Either Fahrenheit or Celsius), covariance matrix should be used. In cases where scales are different, covariance matrix can also adjust the scales of the variables. For example, if you want to conduct PCA on population for different states, using covariance matrix would account for the size of each states.
+Then, how should we choose what matrix to use for Principal Component Analysis? Covariance matrix is commonly used when variables are on the same scale. If the variables are on different scale, correlation matrix is used. For example, if the variables have different units of measure, such as pounds and inches. Since you cannot compare pounds and inches directly, you should use correlation matrix. If you want to conduct PCA on the temperature data for different cities, since the units of measure are the same (Either Fahrenheit or Celsius), covariance matrix should be used. In cases where scales are different, covariance matrix can also adjust the scales of the variables. For example, if you want to conduct PCA on population for different states, using covariance matrix would account for the size of each state.
 
 \begin{marginfigure}
     \centering
@@ -190,7 +190,7 @@ Then, how should we choose what matrix to use for Principal Component Analysis? 
 Helpful Resource: 
 \href{https://www.cs.cmu.edu/~venkatg/teaching/CStheory-infoage/book-chapter-4.pdf}{CMU CS Theory}
 
-Singular Value decomposition is decomposition of a matrix M (m by n) whose entries come from the field K, which is either the field of real numbers or the field of complex numbers. The decomposition takes the form of ${\displaystyle \mathbf {M} =\mathbf {U} {\boldsymbol {\Sigma }}\mathbf {V} ^{*}}$, where $\mathbf{U}$ is m by m unitary matrix (if  K = ${\displaystyle \mathbb {R} } \mathbb {R}$ , unitary matrices are orthogonal matrices), $\boldsymbol{{\Sigma}}$ is a diagonal m by n matrix with non-negative real numbers on the diagonal, $\mathbf{V}$ is an n by n unitary matrix over K, and
+Single Value decomposition is decomposition of a matrix M (m by n) whose entries come from the field K, which is either the field of real numbers or the field of complex numbers. The decomposition takes the form of ${\displaystyle \mathbf {M} =\mathbf {U} {\boldsymbol {\Sigma }}\mathbf {V} ^{*}}$, where $\mathbf{U}$ is m by m unitary matrix (if  K = ${\displaystyle \mathbb {R} } \mathbb {R}$ , unitary matrices are orthogonal matrices), $\boldsymbol{{\Sigma}}$ is a diagonal m by n matrix with non-negative real numbers on the diagonal, $\mathbf{V}$ is an n by n unitary matrix over K, and
 $\mathbf{{V}^{*}}$ is the conjugate transpose of V.
 
 The diagonal entries ${\sigma_{i}}$ of $\mathbf{\Sigma}$ are known as the singular values of M. A common convention is to list the singular values in descending order. In the other words, the first entry of the singular value (eigenvalue) represents how much of eigenvector corresponding to the eigenvalue is represented in the data. The second entry of the singular value represents the second most eminent direction how data is projected and so on. Therefore, by picking certain number of singular value, you can scale your data set and this process is called Principal Component Analysis. (\href{https://en.wikipedia.org/wiki/Singular-value_decomposition}{Referenced})
@@ -209,7 +209,7 @@ The diagonal entries ${\sigma_{i}}$ of $\mathbf{\Sigma}$ are known as the singul
 \section{Frequency Analysis and Filtering (3 hours)}
 
 \subsection{Discrete Fourier Transform (DFT)}
-*This section reviews and builds off section of the overnight from Module 2 Night 3.
+This section reviews and builds off section of the overnight from Module 2 Night 3.
 
 Key ideas reviewed:
 \begin{itemize}
@@ -225,13 +225,14 @@ Recall that when a computer (or any digital device) samples an audio source, it 
     \includegraphics[width = 6cm, height = 4cm]{discrete_time.png}
     \label{fig:discrete_time}
 \caption{A continuous signal (in grey) being sampled at a specified sample rate (red arrows).}
+	\label{fig:discrete_time}
 \end{marginfigure}
 
 As in figure \ref{fig:discrete_time}, a continuous sound signal can be broken up, or sampled, at different points. As you can imagine, if you don't sample at a high enough frequency, you will lose valuable information about your continuous signal. This is called aliasing. As you also might remember, as per the \textit{Nyquist Sampling Theorem}, you only have to sample at twice the frequency of the highest frequency present in your continuous signal to be able to fully reconstruct your continuous signal. 
 
-Once you have turned a analog, continuous signal into a digital, discrete signal in the time domain, you can project it into the frequency domain which allows for rich analysis of the information within the signal. 
+Once you have turned an analog, continuous signal into a digital, discrete signal in the time domain, you can project it into the frequency domain which allows for rich analysis of the information within the signal. 
 
-If you'd like to watch a quick (4 minutes) refresher video on the DFT, \href{https://www.youtube.com/watch?v=h6QJLx22zrE}{here} is a good video that explains how it works.
+If you'd like to watch a quick (4 minute) refresher video on the DFT, \href{https://www.youtube.com/watch?v=h6QJLx22zrE}{here} is a good video that explains how it works.
 
 Recall that the Discrete Fourier Transform (DFT) works by taking a signal and sampling at a certain frequency $Fs$ and then correlating how much of each sinusoidal basis function is in each sample. 
 
