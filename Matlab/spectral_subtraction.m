@@ -7,11 +7,10 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
     %
     %   Output: processed audio signal (column vector)
     
-
     ups = size(unprocessed);
     ras = size(room_audio);
     min_length = min(ups(1), ras(1));
-    
+
     %   Adds zeros to the end of the shorter vector
     length_diff = max(ups(1), ras(1)) - min_length;
     correction_mat = zeros(length_diff, 1);
@@ -36,7 +35,7 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
     %   Process data
     eq_size = size(equalized);
     num_samples = eq_size(2);
-    data = equalized(1:sample_length*Fs, :);    %   Cut to sample length
+    data = equalized(1:round(sample_length*Fs), :);    %   Cut to sample length
 
     %   Slice the data into little bits
     fft_length = length(fft(data(1:slice_length*Fs, 1)));
@@ -81,7 +80,7 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
 
     %   Prepare to transfer back into time domain
     cleaned_freq = M_clean.*exp(1j*T);
-    cleaned_time = zeros(sample_length*Fs, num_samples);
+    cleaned_time = zeros(round(sample_length*Fs), num_samples);
 
     for s = 1:num_samples
         %   Cycle through samples
@@ -106,12 +105,12 @@ function processed = spectral_subtraction(unprocessed, room_audio, Fs)
 
     unprocessed = data(:, test_num);
     processed = real(cleaned_time(:, test_num));
-    subplot(2, 2, 1);
-    plot(unprocessed);
-    subplot(2, 2, 2);
-    plot(processed);
-    subplot(2, 2, 3);
-    plot(room_audio);
+%     subplot(2, 2, 1);
+%     plot(unprocessed);
+%     subplot(2, 2, 2);
+%     plot(processed);
+%     subplot(2, 2, 3);
+%     plot(room_audio);
     %subplot(2, 2, 4);
     %plot(fftshift(abs(fft(processed))));
     %sound(unprocessed/max(unprocessed), Fs);

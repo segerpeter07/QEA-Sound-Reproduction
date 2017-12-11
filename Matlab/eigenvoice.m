@@ -2,9 +2,13 @@ function correct = eigenvoice(dataset, voice_num)
     load(dataset)
     load names.mat
     
-    equalized1 = preprocessing(dataset, 1);
-    equalized2 = preprocessing(dataset, 2);
-    equalized3 = preprocessing(dataset, 3);
+%     equalized1 = preprocessing(dataset, 1);
+%     equalized2 = preprocessing(dataset, 2);
+%     equalized3 = preprocessing(dataset, 3);
+
+    equalized1 = trial_1;
+    equalized2 = trial_2;
+    equalized3 = trial_3;
 
     % comment this if you don't want to have fft
     fft_equalized1 = abs(fft(equalized1));
@@ -30,6 +34,8 @@ function correct = eigenvoice(dataset, voice_num)
     %Names = [Names(1:voice_num - 1, :); Names(voice_num + 1:end, :)];
     [Reduced_Train, Reduced_Test] = voice_reduced(fft_eq_test_removed, voice_data);
 
+    ans_matrix = eye(min(size(trial_1)));
+    
     % returns index of the identified voice file
     [index] = calculate_difference(Reduced_Train, Reduced_Test);
     
