@@ -18,7 +18,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">Eigenvoice</a>
+				<a href="eigenvoices.html" class="title">Eigenvoice</a>
 				<nav>
 					<ul>
 						<li><a href="eigenvoice.html">Home</a></li>
@@ -33,10 +33,13 @@
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">Pincipal Component Analysis</h1>
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<h1 class="major">Principal Component Analysis</h1>
+							<p>In any set of vectors, there is presumably a vector that indicates a direction of most variation, and gives the most useful information about a particular data point. By projecting your data onto a set of basis vectors that maximize variation along them, you can get more information with fewer coefficients and are able to better identify an individual.</p>
+                            <p>In a way similar to the eigenfaces facial recognition algorithm, we applied this basic principle to the recognition of individual voices. After filtering and processing our audio files, we applied a discrete Fourier transform and subtracted out the mean voice. After that, we calculated the eigenvectors of the covariance matrix and used these as a basis of projection for our voice data. We experimented with different numbers of eigenvectors, and interestingly, we saw no significant increase or decrease in the accuracy of our predictions as we increased above five vectors.</p>
+                            
+											<div class="4u"><span class="image fit"><img src="images/Eigen.png" alt="" /></span></div>
+                                            
+                            <p>Furthermore, even when using an optimal number of eigenvectors, we still only found an accuracy of thirty to forty percent. This may have to do with the quality of our training data - they were taken in a noisy hallway, with other voices in the background - and also the limitations of eigenvoices as a recognition algorithm. To address the second possibility, we began to explore other ways of differentiating voices, such as linear regression.
 						</div>
 					</section>
 

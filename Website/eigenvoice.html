@@ -49,11 +49,13 @@
 				<!-- What it is -->
 					<section id="one" class="wrapper style3">
 						<div class="inner">
-							<h1>What it is</h1>
-							<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+						  <h1>What it is</h1>
+						  <p><span class="image right">V</span></p>
+                          Voice recognition and synthesis are relevant challenges facing various industries. Smart home technology recognizes the voices of individuals; mobile security can use voice as an alternative to fingerprint or pin; artificial speech brings back the voices of ALS victims, personalized to sound like an individual. <br><br>
+							<p>For this project, we have explored the area of voice recognition and synthesis, and different methods of applying each. This involved research into interesting aspects of audio filtering, frequency analysis, and linear algebra topics.</p>
 							<ul class="actions">
-								<li><a href="#two" class="button scrolly">Learn more</a></li>
-							</ul>
+							  <li><a href="#two" class="button scrolly">Learn more</a></li>
+						  </ul>
 						</div>
 					</section>
 
@@ -64,7 +66,7 @@
 							<div class="content">
 								<div class="inner">
 									<h2>Spectral Subtraction Filtering</h2>
-									<p>Using samples of only background noise along with the whole signal, the frequencies with prevelent noise were modulated to reduce the noise with very accurate results.</p>
+									<p>Using samples of ambient noise, the background sounds were filtered out of our data sets through subtraction in the frequency domain.</p>
 									<ul class="actions">
 										<li><a href="spectralsubtraction.html" class="button">Learn more</a></li>
 									</ul>
@@ -91,6 +93,18 @@
 									<p>Each word dataset contained three sub-datasets that were used to calculate the covariance matrix. Then the eigenvectors were calculated and the principal components used to identify voices.</p>
 									<ul class="actions">
 										<li><a href="pca.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+      					<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Linear Regression</h2>
+									<p>As an alternative to eigenvoices, linear regression recognizes individual voices by fitting them to a linear function based on training data.</p>
+									<ul class="actions">
+										<li><a href="linearregression.html" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>

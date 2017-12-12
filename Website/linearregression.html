@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Eigenvoices - </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<a href="eigenvoice.html" class="title">Eigenvoice</a>
+				<nav>
+					<ul>
+						<li><a href="eigenvoice.html">Home</a></li>
+						<li><a href="generic.html" class="active">Generic</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Linear Regression</h1>
+                            <p>As an alternative to eigenvoices, we experimented with linear regression as a way to identify individual's voices. In this method, rather than projecting the data into high-variation orthonormal bases, you solve a system of equations for your training data. In our case, we used a downsampled discrete Fourier transform of each voice sample.</p>
+                            <p>We also included a regularization coefficient to our equation. This term helps prevent the regression model from becoming overconstrained to the training data and giving unreliable results. To optimize this constant for accuracy in this particular situation, we tested several different constants with our training data and calculated an average accuracy. This resulted in a clear peak around 2500, from which we can get an accuracy of over 36%.</p>
+											<div class="4u"><span class="image fit"><img src="images/Lambda.png" alt="" /></span></div>
+							<p></p>
+							<p></p>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>Made with &hearts; at Olin College in Needham, MA. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li><a href="#" class="fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
